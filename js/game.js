@@ -56,6 +56,8 @@ const collisions = () => {
   } else if (y + dirY > canvas.height - ballRadius) {
     if (x > paddleX && x < paddleX + paddleWidth) {
       dirY = -dirY;
+      dirX = dirX + 0.2;
+      dirY = dirY - 0.2;
     } else {
       document.location.reload();
     }
