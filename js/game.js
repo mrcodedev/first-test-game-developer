@@ -26,7 +26,7 @@ const draw = () => {
   ball();
   paddle();
 
-  collisionsBall();
+  collisions();
   movePaddle();
 };
 
@@ -46,14 +46,21 @@ const paddle = () => {
   ctx.closePath();
 };
 
-const collisionsBall = () => {
+const collisions = () => {
   if (x + dirX > canvas.width - ballRadius || x + dirX < ballRadius) {
     dirX = -dirX;
   }
 
-  if (y + dirY > canvas.height - ballRadius || y + dirY < ballRadius) {
+  if (y + dirY < ballRadius) {
     dirY = -dirY;
+  } else if (y + dirY > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dirY = -dirY;
+    } else {
+      document.location.reload();
+    }
   }
+
   x += dirX;
   y += dirY;
 };
